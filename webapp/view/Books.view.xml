@@ -1,0 +1,64 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="vd.com.ListOfBooks.controller.Books"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:fb="sap.ui.comp.filterbar">
+	<Page id="id-books-page" title="{i18n>PageTitleListOfBooks}">
+		<content>
+			<fb:FilterBar id="id-Filterbar" clear="onClear" search="onFilter" showRestoreButton="true" showClearButton="true" showClearOnFB="true"
+				useToolbar="true" showFilterConfiguration="true" deltaVariantMode="true" filterContainerWidth="16rem">
+				<fb:filterGroupItems>
+					<fb:FilterGroupItem groupName="A1" name="FilterAuthor" label="{i18n>LabelAuthor}" labelTooltip="{i18n>LabelAuthor}"
+						visibleInFilterBar="true">
+						<fb:control>
+							<ComboBox id="id-Filter-Author" items="{oJsonModelBooks>/Authors}" change="onSearchBook" placeholder="{i18n>PlaceholderSelectAuthor}">
+								<core:Item key="{oJsonModelBooks>idBook}" text="{oJsonModelBooks>firstName} {oJsonModelBooks>lastName}"/>
+							</ComboBox>
+						</fb:control>
+					</fb:FilterGroupItem>
+					<fb:FilterGroupItem groupName="A1" name="FilterBooks" label="{i18n>LabelBooks}" labelTooltip="{i18n>LabelBooks}" visibleInFilterBar="true">
+						<fb:control>
+							<ComboBox id="id-Filter-Books" items="{oJsonModelBooks>/Books}" placeholder="{i18n>PlaceholderSelectBook}" change="onChange">
+								<core:Item key="{oJsonModelBooks>id}" text="{oJsonModelBooks>title}"/>
+							</ComboBox>
+						</fb:control>
+					</fb:FilterGroupItem>
+				</fb:filterGroupItems>
+			</fb:FilterBar>
+			<Table inset="false" items="{oJsonModelBooks>/Books}" mode="SingleSelectMaster" id="id-Table" growing="true" growingThreshold="20">
+				<headerToolbar>
+					<Toolbar>
+						<Title text="{i18n>TableTitleBooks}" level="H2"/>
+						<ToolbarSpacer/>
+						<Button icon="{mainView>/screen}" tooltip="{i18n>FullScreen}" type="Transparent" press="onFullScreen"/>
+					</Toolbar>
+				</headerToolbar>
+				<columns>
+					<Column minScreenWidth="Tablet" demandPopin="true" width="5rem">
+						<Text text=""/>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true">
+						<Text text="{i18n>LabelTitle}"/>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" width="50rem">
+						<Text text="{i18n>LabelDescription}"/>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+						<Text text="{i18n>LabelPageCount}"/>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true">
+						<Text text="{i18n>LabelPublishDate}"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<core:Icon src="sap-icon://education" size="2rem"/>
+							<Text text="{oJsonModelBooks>title}"/>
+							<Text text="{oJsonModelBooks>description}"/>
+							<Text text="{oJsonModelBooks>pageCount}"/>
+							<Text text="{ path: 'oJsonModelBooks>publishDate', formatter: '.formatter.displayDate'}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</content>
+	</Page>
+</mvc:View>
