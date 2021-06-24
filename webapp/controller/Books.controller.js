@@ -64,7 +64,7 @@ sap.ui.define([
 					return oJsonModelAuthors.some(function (v2) {
 						return v.id === sSelectedItem;
 					});
-				})
+				});
 				this.getModel("oJsonModelBooks").setProperty("/Books", result);
 			} catch (err) {
 				MessageBox.error(err.message);
@@ -92,7 +92,7 @@ sap.ui.define([
 		onChange: function (oEvent) {
 			var sValue = oEvent.getParameter('value');
 			MessageToast.show(sValue);
-		},
+		}
 
 		/**
 		 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered

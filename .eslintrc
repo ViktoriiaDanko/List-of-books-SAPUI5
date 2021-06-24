@@ -356,5 +356,8 @@
 		"mocha": true,
 		"jasmine": false,
 		"es6": true
+	},
+	"parserOptions": {
+    	"ecmaVersion": 2017
 	}
 }
